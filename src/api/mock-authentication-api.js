@@ -1,13 +1,5 @@
-const INVALID_PASSWORD = '12345678';
-
 export const login = (username, password) => {
-    return new Promise((resolve, reject) => {
-        if (password !==  INVALID_PASSWORD) {
-            resolve();
-        } else {
-            reject();
-        }
-    })
+    return new Promise((resolve) => resolve())
 };
 
 export const logout = () => Promise.resolve();
