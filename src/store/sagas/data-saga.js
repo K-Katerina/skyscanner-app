@@ -1,6 +1,6 @@
 import {call, put, takeLatest} from "@redux-saga/core/effects";
 import {getQuotesResult} from "../../api/skyscanner-api";
-import {getErrorAction, updateQuotesResultAction, getQuotesResultCompletedAction} from "../actions/actions";
+import {getErrorAction, getQuotesResultCompletedAction} from "../actions/actions";
 
 function* fetchQuotesResult(action) {
     try {

@@ -8,4 +8,4 @@ const skyscannerApiClient = axios.create({
     }
 });
 
-export const getQuotesResult = (selectedDate) => skyscannerApiClient.get(selectedDate).then(({data}) => data)
+export const getQuotesResult = (selectedDate) => skyscannerApiClient.get(selectedDate).then(({data}) => data);

@@ -17,7 +17,7 @@ const App = () => {
     return (
         <BrowserRouter>
             <Switch>
-                <Route exact path={AppRoute.ROOT} component={FlightPage}/>
+                <Route exact path={AppRoute.ROOT} component={withPrivateRoute(FlightPage, isLoggedIn, AppRoute.LOGIN)}/>
                 <Route exact path={AppRoute.LOGIN} component={withPrivateRoute(SignInPage, !isLoggedIn, AppRoute.ROOT)}/>
                 <Redirect to={AppRoute.ROOT}/>
             </Switch>

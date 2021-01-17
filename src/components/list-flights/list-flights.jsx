@@ -11,15 +11,15 @@ export const ListFlights = () => {
 
     useEffect(() => {
         dispatch(updateQuotesResultAction(selectedDate));
-    }, []);
+    }, [dispatch, selectedDate]);
 
     return (
         <>
         { isLoading
             ? <div>Загрузка...</div>
-            : <ul className="list-group list-group-flush overflow-auto" style={{'max-height':'600px'}}>
+            : <ul className="list-group list-group-flush overflow-auto" style={{maxHeight: '600px'}}>
                 {result.Quotes.map((quote) =>
-                    <ItemFlight item={quote}/>
+                    <ItemFlight key={quote.QuoteId} item={quote}/>
                 )}
             </ul>
         }
