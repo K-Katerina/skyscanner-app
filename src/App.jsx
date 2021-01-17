@@ -9,8 +9,7 @@ const App = () => {
 
     return (
         <>
-        <SignInPage/>
-        <span>123 {isLoggedIn+'k'}</span>
+        <FlightPage/>
         </>
         // <BrowserRouter>
         //     <Switch>

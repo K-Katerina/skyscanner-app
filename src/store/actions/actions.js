@@ -6,9 +6,9 @@ export const getErrorAction = () => ({
     type: 'GET_ERROR'
 });
 
-export const getQuotesResultCompletedAction = (browseQuotesResult) => ({
+export const getQuotesResultCompletedAction = (payload) => ({
     type: 'GET_RESULTS_SUCCESS',
-    payload: browseQuotesResult
+    payload: payload
 });
 
 export const login = ({username, password}) => ({
@@ -33,4 +33,14 @@ export const logout = () => ({
 
 export const logoutSuccess = () => ({
     type: 'LOGOUT_SUCCESS'
+});
+
+export const updateDate = (payload) => ({
+    type: 'UPDATE_DATE',
+    payload: payload
+});
+
+export const updateFavorites = (payload) => ({
+    type: 'UPDATE_FAVORITE',
+    payload: payload
 });

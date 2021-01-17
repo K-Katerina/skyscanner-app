@@ -1,6 +1,9 @@
+import moment from "moment";
+
 const initialState = {
     browseQuotesResult: null,
-    loading: true
+    loading: true,
+    selectedDate: moment(new Date()).format('YYYY-MM-DD')
 }
 
 export const quotesResultReducer = (state = initialState, action) => {
@@ -20,6 +23,11 @@ export const quotesResultReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false
+            }
+        case 'UPDATE_DATE':
+            return {
+                ...state,
+                selectedDate: moment(action.payload).format('YYYY-MM-DD')
             }
         default:
             return state;

@@ -7,6 +7,26 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+body, html, #root {
+  height: 100%;
+  background-color: #E5E5E5;
+}
+
+.wrapper-auth::before {
+  content: '';
+  position: absolute;
+  left: -5px;
+  right: -5px;
+  top: -5px;
+  bottom: -5px;
+  z-index: -1;
+  background: url('assets/back.png') no-repeat center center fixed;
+  background-size: cover;
+  filter: opacity(40%) blur(5px);
+}
+
+
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
