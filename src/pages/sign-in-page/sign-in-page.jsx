@@ -5,12 +5,33 @@ import {login} from "../../store/actions/actions";
 export const SignInPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [errorEmail, setErrorEmail] = useState('');
+    const [errorPassword, setErrorPassword] = useState('');
     const dispatch = useDispatch();
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        dispatch(login({email, password}));
+        const emailInvalid = validateField('email', email);
+        setErrorEmail(emailInvalid);
+        const passwordInvalid = validateField('password', password);
+        setErrorPassword(passwordInvalid);
+        if (!emailInvalid && !passwordInvalid) {
+            dispatch(login({email, password}));
+        }
     };
+
+    const validateField = (fieldName, value) => {
+        switch (fieldName) {
+            case 'email':
+                return value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)
+                    ? '' : 'Email is invalid';
+            case 'password':
+                return value.match(/^[A-Za-z0-9]+$/i) && value.length >= 8
+                    ? '' : 'Password is invalid';
+            default:
+                break;
+        }
+    }
 
     return (
         <section className="wrapper-auth d-flex h-100 align-self-center justify-content-center" >
@@ -20,14 +41,23 @@ export const SignInPage = () => {
                     <div className="d-flex flex-column">
                         <label htmlFor="email" className="form-label">
                             Логин:
-                            <input id="email" className="form-control" type="email" onChange={(event) => setEmail(event.target.value)}/>
+                            <input id="email" value={email} className={`${errorEmail && 'is-invalid'} form-control`} type="email" onChange={(event) => {
+                                setErrorEmail('');
+                                setEmail(event.target.value)
+                            }}/>
+
+                            <p className={`${errorEmail && 'invalid-feedback'}`}>{errorEmail}</p>
                         </label>
                     </div>
                     <div className="d-flex flex-column">
                         <label htmlFor="password" className="form-label">
                             Пароль:
-                            <input id="password" className="form-control" type="password" onChange={(event) => setPassword(event.target.value)}/>
-                    </label>
+                            <input id="password" value={password} className={`${errorPassword && 'is-invalid'} form-control`}  type="password" onChange={(event) => {
+                                setErrorPassword('');
+                                setPassword(event.target.value)
+                            }}/>
+                            <p className={`${errorPassword && 'invalid-feedback'}`}>{errorPassword}</p>
+                        </label>
                     </div>
                 <button type="submit" className="btn btn-primary align-self-end">Войти</button>
                 </div>

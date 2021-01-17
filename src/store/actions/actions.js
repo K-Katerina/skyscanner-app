@@ -1,5 +1,6 @@
-export const getQuotesResultAction = () => ({
-  type: 'GET_RESULTS'
+export const updateQuotesResultAction = (payload) => ({
+    type: 'UPDATE_RESULTS',
+    payload: payload
 });
 
 export const getErrorAction = () => ({
@@ -33,11 +34,6 @@ export const logout = () => ({
 
 export const logoutSuccess = () => ({
     type: 'LOGOUT_SUCCESS'
-});
-
-export const updateDate = (payload) => ({
-    type: 'UPDATE_DATE',
-    payload: payload
 });
 
 export const updateFavorites = (payload) => ({

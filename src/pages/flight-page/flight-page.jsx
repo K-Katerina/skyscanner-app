@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react';
 import moment from "moment";
+import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {
-    getQuotesResultAction,
+    updateQuotesResultAction,
     logout,
-    updateDate,
     updateFavorites
 } from "../../store/actions/actions";
 import {getWordForm} from "../../utils";
+import {AppRoute} from "../../App";
 
 export const FlightPage = () => {
 
@@ -19,7 +20,7 @@ export const FlightPage = () => {
     const favoriteIds = useSelector(state => state.user.favoriteIds);
 
     useEffect(() => {
-        dispatch(getQuotesResultAction());
+        dispatch(updateQuotesResultAction(selectedDate));
     }, []);
 
     const getPlacesById = (id) => {
@@ -36,7 +37,7 @@ export const FlightPage = () => {
     }
 
     const handleCalendarChange = (event) => {
-        dispatch(updateDate(event.target.value));
+        dispatch(updateQuotesResultAction(event.target.value));
     }
 
     const handleFavoriteChange = (id) => {
@@ -47,7 +48,7 @@ export const FlightPage = () => {
         <>
             <header className="d-flex justify-content-end p-2">
                 <button type="button" className="btn btn-link text-decoration-none" onClick={() => handleLogoutButtonClick()}>
-                    <b className="text-primary">{isLoggedIn ? 'Выйти' : 'Войти'}&nbsp;</b>
+                    <Link to={AppRoute.LOGIN}  className="text-primary fw-bold text-decoration-none">{isLoggedIn ? 'Выйти' : 'Войти'}&nbsp;</Link>
                     <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M8 20H4C3.46957 20 2.96086 19.7893 2.58579 19.4142C2.21071 19.0391 2 18.5304 2 18V4C2 3.46957 2.21071 2.96086 2.58579 2.58579C2.96086 2.21071 3.46957 2 4 2H8" stroke="#1157A7" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M15 16L20 11L15 6" stroke="#1157A7" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -56,24 +57,24 @@ export const FlightPage = () => {
                 </button>
             </header>
 
-            {isLoading
+
+            <article className="d-flex flex-column m-auto bg-white p-5 shadow border-light" style={{'width': '600px', 'borderRadius': '1.5rem'}}>
+                <div className="d-flex justify-content-between align-items-baseline">
+                    <h4 className="">
+                        Вылеты
+                        <small className="text-muted">&nbsp;>&nbsp;</small>
+                        SVO&nbsp;-&nbsp;JFK
+                    </h4>
+                    <input className="fw-bold text-primary text-end border-0 fs-5" style={{'width': '12rem'}} type="date" name="calendar" value={selectedDate}
+                       max="2022-12-31" min={moment(new Date()).format('YYYY-MM-DD')} onChange={(event) => handleCalendarChange(event)}/>
+                </div>
+                <div>
+                    <span>Добавлено в Избранное: <span className="fw-bold text-primary">{favoriteIds.size}</span>&nbsp;{getWordForm(favoriteIds.size, ['рейс', 'рейса', 'рейсов'])}</span>
+                </div>
+
+                {isLoading
                 ? <div>Загрузка...</div>
-                : <article className="d-flex flex-column m-auto bg-white p-5 shadow border-light" style={{'width': '600px', 'borderRadius': '1.5rem'}}>
-                    <div className="d-flex justify-content-between align-items-baseline">
-                        <h4 className="">
-                            Вылеты
-                            <small className="text-muted">&nbsp;>&nbsp;</small>
-                            SVO&nbsp;-&nbsp;JFK
-                        </h4>
-                        <input className="fw-bold text-primary text-end border-0 fs-5" style={{'width': '12rem'}} type="date" name="calendar" value={selectedDate}
-                           max="2022-12-31" min="2020-01-01" onChange={(event) => handleCalendarChange(event)}/>
-                    </div>
-                        <div>
-                            <span>Добавлено в Избранное: <span className="fw-bold text-primary">{favoriteIds.length}</span>&nbsp;{getWordForm(favoriteIds.length, ['рейс', 'рейса', 'рейсов'])}</span>
-                        </div>
-
-
-                        <ul className="list-group list-group-flush">
+                : <ul className="list-group list-group-flush">
                             {result.Quotes.map((quote) =>
                                 <li key={quote.QuoteId} className="list-group-item">
                                     <div className="row">
@@ -92,27 +93,27 @@ export const FlightPage = () => {
                                                 <span>{getPlacesById(quote.OutboundLeg.DestinationId)}</span>
                                             </div>
                                             <div>
-                                                {moment(quote.QuoteDateTime).format('DD MMM, YYYY')} - {moment(quote.QuoteDateTime).format('HH:mm')}
+                                                {moment(quote.OutboundLeg.DepartureDate).format('DD MMM, YYYY')} - {moment(quote.OutboundLeg.DepartureDate).format('HH:mm')}
                                             </div>
                                             <div>
                                                 {getListCarriers(quote.OutboundLeg.CarrierIds)}
                                             </div>
                                         </div>
                                         <div className="col-3 d-flex flex-column justify-content-between align-items-end">
-                                            <button className="btn btn-link p-0" style={{'width':'min-content'}} onClick={() => handleFavoriteChange(quote.QuoteId)}
+                                            <button className="btn btn-link p-0" style={{'width':'min-content'}} onClick={() => handleFavoriteChange(quote.QuoteId + selectedDate)}
                                                     type="button">
-                                                <svg width="23" height="20" viewBox="0 0 23 20" fill={favoriteIds.includes(quote.QuoteId) ? '#F04393' : 'none'} xmlns="http://www.w3.org/2000/svg">
+                                                <svg width="23" height="20" viewBox="0 0 23 20" fill={favoriteIds.has(quote.QuoteId + selectedDate) ? '#F04393' : 'none'} xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M20.3807 2.59133C19.8676 2.08683 19.2583 1.68663 18.5878 1.41358C17.9172 1.14054 17.1985 1 16.4727 1C15.7468 1 15.0281 1.14054 14.3576 1.41358C13.687 1.68663 13.0778 2.08683 12.5646 2.59133L11.4997 3.63785L10.4348 2.59133C9.39834 1.57276 7.99258 1.00053 6.52679 1.00053C5.06099 1.00053 3.65523 1.57276 2.61876 2.59133C1.58229 3.6099 1 4.99139 1 6.43187C1 7.87235 1.58229 9.25383 2.61876 10.2724L3.68367 11.3189L11.4997 19L19.3158 11.3189L20.3807 10.2724C20.8941 9.76814 21.3013 9.16942 21.5791 8.51045C21.857 7.85148 22 7.14517 22 6.43187C22 5.71857 21.857 5.01225 21.5791 4.35328C21.3013 3.69431 20.8941 3.09559 20.3807 2.59133V2.59133Z" stroke="#878787" stroke-linecap="round" stroke-linejoin="round"/>
                                                 </svg>
                                             </button>
-                                            <div><small className="text-muted">Price:</small> {quote.MinPrice}₽</div>
+                                            <div><small className="text-muted">Price:&nbsp;</small>{quote.MinPrice}₽</div>
                                         </div>
                                     </div>
                                 </li>
                             )}
-                        </ul>
-                    </article>
-            }
+                        </ul>}
+
+            </article>
         </>
     );
 }

@@ -17,7 +17,7 @@ export function* loginSaga() {
     yield takeLatest('LOGIN', login);
 }
 
-function* logout(action) {
+function* logout() {
     yield call(logoutApi);
     localStorage.removeItem('isLoggedIn');
     yield put(logoutSuccess());

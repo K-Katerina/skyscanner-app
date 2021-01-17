@@ -11,9 +11,7 @@ export const getWordForm = function (n, array) {
     }
 };
 
-export const updateElementInArray = (el, array) => {
-    const index = array.findIndex((it) => it === el);
-    return index !== -1
-        ? [...array.slice(0, index), ...array.slice(index + 1)]
-        : [...array.slice(0, index), el, ...array.slice(index + 1)]
+export const updateElementInArray = (el, set) => {
+    set.delete(el) || set.add(el)
+    return new Set(set.values());
 };

@@ -8,10 +8,11 @@ const initialState = {
 
 export const quotesResultReducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'GET_RESULTS':
+        case 'UPDATE_RESULTS':
             return {
                 ...state,
-                loading: true
+                loading: true,
+                selectedDate: moment(action.payload).format('YYYY-MM-DD')
             };
         case 'GET_RESULTS_SUCCESS':
             return {
@@ -23,11 +24,6 @@ export const quotesResultReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false
-            }
-        case 'UPDATE_DATE':
-            return {
-                ...state,
-                selectedDate: moment(action.payload).format('YYYY-MM-DD')
             }
         default:
             return state;

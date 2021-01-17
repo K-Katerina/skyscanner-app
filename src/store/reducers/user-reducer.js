@@ -2,7 +2,7 @@ import {updateElementInArray} from "../../utils";
 
 const initialState = {
     isLoggedIn: !!localStorage.getItem('isLoggedIn'),
-    favoriteIds: []
+    favoriteIds: new Set()
 }
 
 export const userReducer = (state = initialState, action) => {
@@ -20,7 +20,7 @@ export const userReducer = (state = initialState, action) => {
         case 'UPDATE_FAVORITE':
             return {
                 ...state,
-                favoriteIds: updateElementInArray(action.payload, state.favoriteIds),
+                favoriteIds: updateElementInArray(action.payload, state.favoriteIds)
             };
         default:
             return state;
