@@ -1,6 +1,8 @@
 ### Тестовое задание
 #### на позицию Junior Frontend Developer
 
+Проект развернут по адресу: https://skyscanner-app.herokuapp.com/
+
 ---
 В данном проекте продемонстрирована работа с API от skyscanner: https://rapidapi.com/skyscanner/api/skyscanner-flight-search/endpoints.
 
