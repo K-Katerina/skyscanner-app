@@ -12,7 +12,6 @@ export const quotesResultReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: true,
-                selectedDate: moment(action.payload).format('YYYY-MM-DD')
             };
         case 'GET_RESULTS_SUCCESS':
             return {
@@ -24,6 +23,11 @@ export const quotesResultReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false
+            }
+        case 'UPDATE_SELECTED_DATE':
+            return {
+                ...state,
+                selectedDate: moment(action.payload).format('YYYY-MM-DD')
             }
         default:
             return state;

@@ -40,3 +40,8 @@ export const updateFavorites = (payload) => ({
     type: 'UPDATE_FAVORITE',
     payload: payload
 });
+
+export const updateDate = (payload) => ({
+    type: 'UPDATE_SELECTED_DATE',
+    payload: payload
+});
