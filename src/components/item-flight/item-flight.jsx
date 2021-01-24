@@ -16,10 +16,12 @@ export const ItemFlight = ({item}) => {
         return ids.map((id) => result.Carriers.find((carrier) => carrier.CarrierId === id).Name + ' ');
     }
 
+    //col-lg-4 col-sm-6 col-md-5
+
     return (
         <li className="list-group-item">
             <div className="row">
-                <div className="col-2 align-self-center">
+                <div className="d-none d-md-inline col-lg-2 col-md-2 align-self-center">
                     <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="32" cy="32" r="32" fill="#0077FF" fillOpacity="0.05"/>
                         <svg width="65" height="65" viewBox="0 -15 38 65" fill="blue" xmlns="http://www.w3.org/2000/svg">
@@ -27,11 +29,11 @@ export const ItemFlight = ({item}) => {
                         </svg>
                     </svg>
                 </div>
-                <div className="col-7">
+                <div className="col-lg-7 col-sm-8 col-md-7 col-8">
                     <div>
-                        <span>{getPlacesById(item.OutboundLeg.OriginId)}</span>
-                        &nbsp;→&nbsp;
-                        <span>{getPlacesById(item.OutboundLeg.DestinationId)}</span>
+                        <span className="d-sm-inline-block">{getPlacesById(item.OutboundLeg.OriginId)}</span>
+                        &nbsp;→
+                        <span className="d-sm-inline-block"> {getPlacesById(item.OutboundLeg.DestinationId)}</span>
                     </div>
                     <div>
                         {moment(item.OutboundLeg.DepartureDate).format('DD MMM, YYYY')} - {moment(item.OutboundLeg.DepartureDate).format('HH:mm')}
@@ -40,10 +42,10 @@ export const ItemFlight = ({item}) => {
                         {getListCarriers(item.OutboundLeg.CarrierIds)}
                     </div>
                 </div>
-                <div className="col-3 d-flex flex-column justify-content-between align-items-end">
+                <div className="col-lg-3 col-sm-4 col-4 col-md-3 d-flex flex-column justify-content-between align-items-end">
                     <ButtonFavorite item={item}/>
                     <div>
-                        <small className="text-muted">
+                        <small className="text-muted d-none d-sm-inline">
                             Price:&nbsp;
                         </small>
                         {item.MinPrice}₽

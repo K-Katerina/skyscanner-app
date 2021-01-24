@@ -7,7 +7,7 @@ import {InfoFavorite} from "../info-favorite/info-favorite";
 export const ArticleFlight = () => {
 
     return (
-        <article className="d-flex flex-column m-auto bg-white p-5 shadow border-light border-radius col-xl-5 col-lg-7 col-sm-10 col-md-8">
+        <article className="d-flex flex-column m-auto bg-white p-5 shadow border-light border-radius col-xl-6 col-lg-7 col-sm-10 col-md-9">
             <TopArticleFlight/>
             <SectionPhotos/>
             <InfoFavorite/>

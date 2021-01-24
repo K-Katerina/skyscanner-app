@@ -13,7 +13,7 @@ export const TopArticleFlight = () => {
     }
 
     return (
-        <div className="d-flex justify-content-between align-items-baseline">
+        <div className="d-flex flex-wrap justify-content-between align-items-baseline">
             <h4 className="text-dark">
                 Вылеты
                 <small className="text-muted">&nbsp;&gt;&nbsp;</small>
@@ -21,6 +21,7 @@ export const TopArticleFlight = () => {
             </h4>
             <DatePicker
                 onChange={(value) => handleCalendarChange(value)}
+                className="ms-auto"
                 value={selectedDate}
                 format={"dd/MM/yyyy"}
                 placeholder="дд/мм/гггг"
