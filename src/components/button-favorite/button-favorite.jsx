@@ -1,6 +1,7 @@
 import React from 'react';
 import {updateFavorites} from "../../store/actions/actions";
 import {useDispatch, useSelector} from "react-redux";
+import PropTypes from "prop-types";
 
 export const ButtonFavorite = ({item}) => {
     const dispatch = useDispatch();
@@ -19,3 +20,9 @@ export const ButtonFavorite = ({item}) => {
         </button>
     );
 }
+
+ButtonFavorite.propTypes = {
+    item: PropTypes.shape({
+        QuoteId: PropTypes.number.isRequired
+    })
+};

@@ -15,17 +15,24 @@ body, html, #root {
 .wrapper-auth::before {
   content: '';
   position: absolute;
-  left: -5px;
-  right: -5px;
-  top: -5px;
-  bottom: -5px;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
   z-index: -1;
-  background: url('assets/back.png') no-repeat center center fixed;
+  background: url('assets/back.png') no-repeat center center;
   background-size: cover;
   filter: opacity(40%) blur(5px);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.react-date-picker__wrapper {
+  border: none!important;
+}
+
+.border-radius {
+  border-radius: 1.5rem;
+}
+
+.list-group {
+  max-height: 18rem;
 }

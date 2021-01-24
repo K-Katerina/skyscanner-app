@@ -1,9 +1,7 @@
-import moment from "moment";
-
 const initialState = {
     browseQuotesResult: null,
     loading: true,
-    selectedDate: moment(new Date()).format('YYYY-MM-DD')
+    selectedDate: new Date()
 }
 
 export const quotesResultReducer = (state = initialState, action) => {
@@ -27,7 +25,7 @@ export const quotesResultReducer = (state = initialState, action) => {
         case 'UPDATE_SELECTED_DATE':
             return {
                 ...state,
-                selectedDate: moment(action.payload).format('YYYY-MM-DD')
+                selectedDate: action.payload
             }
         default:
             return state;

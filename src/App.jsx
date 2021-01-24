@@ -3,7 +3,7 @@ import {FlightPage} from "./pages/flight-page/flight-page";
 import {Redirect, BrowserRouter, Switch, Route} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {withPrivateRoute} from "./hocs/with-private-route/with-private-route";
-
+import React from "react";
 
 export const AppRoute = {
     LOGIN: `/login`,

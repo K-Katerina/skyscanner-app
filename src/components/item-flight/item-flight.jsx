@@ -2,6 +2,7 @@ import React from 'react';
 import moment from "moment";
 import {useSelector} from "react-redux";
 import {ButtonFavorite} from "../button-favorite/button-favorite";
+import PropTypes from "prop-types";
 
 export const ItemFlight = ({item}) => {
     const result = useSelector(state => state.data.browseQuotesResult);
@@ -52,3 +53,12 @@ export const ItemFlight = ({item}) => {
         </li>
     );
 }
+
+
+ItemFlight.propTypes = {
+    item: PropTypes.shape({
+        QuoteId: PropTypes.number.isRequired,
+        OutboundLeg: PropTypes.object,
+        MinPrice: PropTypes.number
+    })
+};

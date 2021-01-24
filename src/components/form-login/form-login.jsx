@@ -35,7 +35,7 @@ export const FormLogin = () => {
     }
 
     return (
-        <form className="align-self-center bg-white p-5 shadow border-light" style={{'width': '400px', 'borderRadius': '1.5rem'}} noValidate onSubmit={(event) => handleSubmit(event)}>
+        <form className="align-self-center bg-white p-5 shadow border-light border-radius col-lg-4 col-sm-6 col-md-5" noValidate onSubmit={(event) => handleSubmit(event)}>
         <div className="d-flex flex-column">
             <h4 className="align-self-center">Simple Flight Check</h4>
             <div className="d-flex flex-column">

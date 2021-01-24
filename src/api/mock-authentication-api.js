@@ -1,4 +1,4 @@
-export const login = (username, password) => {
+export const login = () => {
     return new Promise((resolve) => resolve())
 };
 

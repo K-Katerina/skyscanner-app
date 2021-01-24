@@ -1,4 +1,5 @@
 import axios from 'axios';
+import moment from "moment";
 
 const skyscannerApiClient = axios.create({
     baseURL: 'https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/RU/RUB/ru-Ru/SVO-sky/JFK-sky/',
@@ -8,4 +9,4 @@ const skyscannerApiClient = axios.create({
     }
 });
 
-export const getQuotesResult = (selectedDate) => skyscannerApiClient.get(selectedDate).then(({data}) => data);
+export const getQuotesResult = (selectedDate) => skyscannerApiClient.get(moment(selectedDate).format('YYYY-MM-DD')).then(({data}) => data);

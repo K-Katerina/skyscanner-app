@@ -11,16 +11,19 @@ export const ListFlights = () => {
 
     useEffect(() => {
         dispatch(updateQuotesResultAction(selectedDate));
-    }, [dispatch, selectedDate]);
+    }, [selectedDate]);
+
+    const getItems = (quotes) => quotes.map((quote) => <ItemFlight key={quote.QuoteId} item={quote}/>);
 
     return (
         <>
-        { isLoading
-            ? <div>Загрузка...</div>
-            : <ul className="list-group list-group-flush overflow-auto" style={{maxHeight: '600px'}}>
-                {result.Quotes.map((quote) =>
-                    <ItemFlight key={quote.QuoteId} item={quote}/>
-                )}
+        { isLoading || !result
+            ? <p className="font-italic text-muted p-3">Загрузка...</p>
+            : <ul className="list-group list-group-flush overflow-auto">
+                { (result.Quotes.length)
+                    ? getItems(result.Quotes)
+                    : <p className="font-italic text-muted p-3">На выбранную дату нет рейсов</p>
+                }
             </ul>
         }
         </>
