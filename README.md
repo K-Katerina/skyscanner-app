@@ -1,5 +1,5 @@
 # Тестовое задание
-#### на позицию Junior Frontend Developer
+#### на позицию Frontend Developer (React)
 
 ---
 
